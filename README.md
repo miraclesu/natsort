@@ -26,7 +26,7 @@ Usage
     fmt.Printf("%+v\n", natsort.Sort(versions))
 	// [num5.10 num5.3 num2 num-3]
     fmt.Printf("%+v\n", natsort.RSort(versions))
- 
+
 Inspired by
 -------
 * [natsort](https://github.com/SethMMorton/natsort)

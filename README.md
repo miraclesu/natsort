@@ -2,7 +2,7 @@ Go natsort
 =====
 
 [![Build Status](https://travis-ci.org/miraclesu/natsort.svg?branch=master)](https://travis-ci.org/miraclesu/natsort)
-[![Coverage Status](https://coveralls.io/repos/miraclesu/natsort/badge.svg?branch=master&service=github&_day=201606)](https://coveralls.io/github/miraclesu/natsort?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/miraclesu/natsort/badge.svg?branch=master)](https://coveralls.io/github/miraclesu/natsort?branch=master)
 
 Natural sorting for Go.
 

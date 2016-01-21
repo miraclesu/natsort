@@ -33,3 +33,28 @@ func isAlpha(a byte) bool {
 func isSpliter(a byte) bool {
 	return a == VersionSpliter
 }
+
+func getPart(version string, i int, ipart []byte) (part []byte, kind, current int, ok bool) {
+	a := version[i]
+	kind, part = Kind(a), ipart
+	part = append(part, a)
+
+	i++
+	ok = (kind == Spliter)
+	if kind != Number {
+		current = i
+		return
+	}
+
+	for count := len(version); i < count; i++ {
+		a = version[i]
+		if Kind(a) != Number {
+			break
+		}
+
+		part = append(part, a)
+	}
+
+	current = i
+	return
+}

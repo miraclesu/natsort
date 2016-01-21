@@ -25,12 +25,12 @@ func (this VersionList) Less(i, j int) bool {
 		return true
 	}
 
-	var partI, partJ []byte
+	partI, partJ := make([]byte, 0, 4), make([]byte, 0, 4)
 	kindI, okI, kindJ, okJ := 0, false, 0, false
 	indexI, indexJ := 0, 0
 	for indexI < countI && indexJ < countJ {
-		partI, kindI, indexI, okI = getPart(this[i], indexI)
-		partJ, kindJ, indexJ, okJ = getPart(this[j], indexJ)
+		partI, kindI, indexI, okI = getPart(this[i], indexI, partI[:0])
+		partJ, kindJ, indexJ, okJ = getPart(this[j], indexJ, partJ[:0])
 
 		if kindI != kindJ {
 			return kindI > kindJ
@@ -60,14 +60,14 @@ func (this VersionList) Less(i, j int) bool {
 
 	if countI > countJ {
 		for indexI < countI {
-			partI, kindI, indexI, okI = getPart(this[i], indexI)
+			partI, kindI, indexI, okI = getPart(this[i], indexI, partI[:0])
 			if !okI {
 				break
 			}
 		}
 	} else {
 		for indexJ < countJ {
-			partJ, kindJ, indexJ, okJ = getPart(this[j], indexJ)
+			partJ, kindJ, indexJ, okJ = getPart(this[j], indexJ, partJ[:0])
 			if !okJ {
 				break
 			}
@@ -78,31 +78,6 @@ func (this VersionList) Less(i, j int) bool {
 		return kindI > kindJ
 	}
 	return countI < countJ
-}
-
-func getPart(version string, i int) (part []byte, kind, current int, ok bool) {
-	a := version[i]
-	kind = Kind(a)
-	part = append(part, a)
-
-	i++
-	ok = (kind == Spliter)
-	if kind != Number {
-		current = i
-		return
-	}
-
-	for count := len(version); i < count; i++ {
-		a = version[i]
-		if Kind(a) != Number {
-			break
-		}
-
-		part = append(part, a)
-	}
-
-	current = i
-	return
 }
 
 func Sort(versions []string) []string {

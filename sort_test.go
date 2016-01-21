@@ -57,6 +57,14 @@ func TestEmptyVersion(t *testing.T) {
 	})
 }
 
+func TestRSort(t *testing.T) {
+	input := []string{"a2", "a5", "a9", "a1", "a4", "a10", "a6"}
+	expect := []string{"a10", "a9", "a6", "a5", "a4", "a2", "a1"}
+	Convey("sort golang version should be success", t, func() {
+		So(RSort(input), ShouldResemble, expect)
+	})
+}
+
 func BenchmarkSort(b *testing.B) {
 	input := []string{"1.6beta1", "1.5rc1", "1.5beta2", "1.5beta1", "1.5.1", "1.5", "1.4rc2", "1.4rc1", "1.4beta1", "1.4.2", "1.4.1", "1.4", "1.3rc2", "1.3rc1", "1.3beta2", "1.3beta1", "1.3.3", "1.3.2", "1.3.1", "1.3", "1.2rc5", "1.2rc4", "1.2rc3", "1.2rc2", "1.2rc1", "1.2.2", "1.2.1", "1.2", "1.1.2", "1.1.1", "1.1", "1.0.3", "1.0.2", "1.5.2", "1.5alpha1"}
 	for i := 0; i < b.N; i++ {
